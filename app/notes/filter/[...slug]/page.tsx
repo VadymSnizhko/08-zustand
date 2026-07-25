@@ -7,10 +7,12 @@ import {
 import NotesClient from "./Notes.client";
 import { fetchNotes } from "@/lib/api";
 import { NoteTag } from "@/types/note";
+import {Metadata} from "next"
 
 type Props = {
   params: Promise<{ slug: string[] }>;
 };
+
 
 const NotesPage = async ({params}: Props) => {
   const { slug } = await params;
