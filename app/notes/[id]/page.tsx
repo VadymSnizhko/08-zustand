@@ -11,10 +11,8 @@ interface Props{
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params
-  console.log(id)
   const note = await getNoteItem(id)
 
-  console.log(note.id)
   return {
     title: `${note.title}`,
     description: note.content.slice(0, 50),
