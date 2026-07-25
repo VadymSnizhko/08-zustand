@@ -18,6 +18,20 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Note Hub",
   description: "A simple and efficient app for create and organizing your notes.",
+  openGraph: {
+      title: `Note Hub`,
+      description: "A simple and efficient app for create and organizing your notes.",
+      url: `https://08-zustand-puce-kappa.vercel.app/`,
+      siteName: 'NoteHub',
+      images: [
+        {
+          url: 'notehub.jpg',
+          width: 1200,
+          height: 630,
+          alt: "Note Hub",
+        },
+      ]
+    }
 };
 
 export default function RootLayout({
