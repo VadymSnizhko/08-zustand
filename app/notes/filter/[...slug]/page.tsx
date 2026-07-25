@@ -14,12 +14,38 @@ type Props = {
 };
 
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const tag = slug[0] === 'all' ? undefined : (slug[0] as NoteTag);
+
+  console.log(tag)
+  return {
+    title: `Notes - ${tag} Tags`,
+    description: `Brows notes tagged with ${tag} tags. NoteHub allows filter and view notes based on specific tags for better organization`,
+      openGraph: {
+      title: `Notes - ${tag} Tags`,
+      description: `ok`,
+      url: `https://08-zustand-puce-kappa.vercel.app/notes/filter/${tag}`,
+      siteName: 'NoteHub',
+      images: [
+        {
+          url: 'notehub.jpg',
+          width: 1200,
+          height: 630,
+          alt: "Note Hub",
+        },
+      ]
+    }
+  }
+}
+
+
 const NotesPage = async ({params}: Props) => {
   const { slug } = await params;
   const tag = slug[0] === 'all' ? undefined : (slug[0] as NoteTag);
   const queryClient = new QueryClient();
 
-  //console.log(tag)
+  console.log(`function: ${tag}`)
 
   await queryClient.prefetchQuery({
     queryKey: ["notes", 1, "", tag],
