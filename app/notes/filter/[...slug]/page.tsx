@@ -16,15 +16,17 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const tag = slug[0] === 'all' ? undefined : (slug[0] as NoteTag);
+  //console.log(slug[0])
+  const tag = slug[0] === 'all' ? 'All' : (slug[0] as NoteTag);
 
-  console.log(tag)
+  const desc = `Brows notes tagged with ${tag} tags. NoteHub allows filter and view notes based on specific tags for better organization`
+  //console.log(tag)
   return {
     title: `Notes - ${tag} Tags`,
-    description: `Brows notes tagged with ${tag} tags. NoteHub allows filter and view notes based on specific tags for better organization`,
+    description: desc,
       openGraph: {
       title: `Notes - ${tag} Tags`,
-      description: `ok`,
+      description: desc,
       url: `https://08-zustand-puce-kappa.vercel.app/notes/filter/${tag}`,
       siteName: 'NoteHub',
       images: [
