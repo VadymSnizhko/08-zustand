@@ -9,10 +9,12 @@ import css from './NotesPage.module.css'
 
 import SearchBox from "@/components/SearchBox/SearchBox"
 import Pagination from "@/components/Pagination/Pagination"
-import Modal from "@/components/Modal/Modal"
-import NoteForm from "@/components/NoteForm/NoteForm"
+//import Modal from "@/components/Modal/Modal"
+//import NoteForm from "@/components/NoteForm/NoteForm"
 import NoteList from "@/components/NoteList/NoteList"
 import { NoteTag } from "@/types/note"
+
+import Link from 'next/link'
 
 type Props = {
   tag?: NoteTag;
@@ -36,16 +38,16 @@ const useDebounce = (
   return debouncedValue;
 };
 
-const NotesClient = ({tag}: Props) => {
+const NotesClient = ({ tag }: Props) => {
   const [page, setPage] = useState<number>(1)
 
   const [search, setSearch] = useState<string>("")
 
-  const [isModalOpen, setIsModalOpen] =
-    useState<boolean>(false);
-/*** */
+  // const [isModalOpen, setIsModalOpen] =
+  //   useState<boolean>(false);
+  /*** */
 
-/*** */
+  /*** */
 
 
   const debouncedSearch =
@@ -87,32 +89,24 @@ const NotesClient = ({tag}: Props) => {
           onChange={setSearch}
         />
 
-      {data && data?.totalPages > 1 &&(
-      <Pagination
-        currentPage={page - 1}
-        totalPages={data.totalPages}
-        onPageChange={({ selected }) => setPage(selected + 1)}
-      />
-      )}
-
-        <button className={css.button}
-          onClick={() => setIsModalOpen(true)}
+        {data && data?.totalPages > 1 && (
+          <Pagination
+            currentPage={page - 1}
+            totalPages={data.totalPages}
+            onPageChange={({ selected }) => setPage(selected + 1)}
+          />
+        )}
+        <Link
+          href="/notes/action/create"
+          className={css.button}
         >
           Create note +
-        </button>
+        </Link>
       </div>
 
       <NoteList notes={data?.notes ?? []} />
 
 
-{isModalOpen && (
-  <Modal
-    isOpen={isModalOpen} 
-    onClose={() => setIsModalOpen(false)}
-  >
-    <NoteForm onClose={() => setIsModalOpen(false)} />
-  </Modal>
-)}
 
     </>
   )
