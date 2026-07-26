@@ -86,7 +86,10 @@ const NotesClient = ({ tag }: Props) => {
       <div className={css.toolbar}>
         <SearchBox
           value={search}
-          onChange={setSearch}
+          onChange={(value) => {
+            setSearch(value);
+            setPage(1);
+          }}
         />
 
         {data && data?.totalPages > 1 && (

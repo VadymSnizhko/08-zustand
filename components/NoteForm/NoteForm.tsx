@@ -21,7 +21,13 @@ const NoteForm = () => {
   const { draft, setDraft, clearDraft } = useNoteStore();
 
   const handleSubmit = (formData: FormData) => {
-    const values = Object.fromEntries(formData) as unknown as CreateNote;
+    //const values = Object.fromEntries(formData) as unknown as CreateNote;
+    const values: CreateNote = {
+      title: formData.get("title") as string,
+      content: formData.get("content") as string,
+      tag: formData.get("tag") as CreateNote["tag"],
+    };
+
 
     mutation.mutate(values);
   };
